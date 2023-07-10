@@ -7,8 +7,7 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-               git credentialsId: 'javahom2', url: 'https://github.com/Mahi9963/myweb.git'           }
-        }
+  git credentialsId: 'Mahidevops', url: 'https://github.com/Mahi9963/myweb.git'        }
         stage("Maven Build"){
             steps{
                 sh "mvn clean package"
