@@ -11,8 +11,8 @@ git credentialsId: 'mahidevops', url: 'https://github.com/Mahi9963/myweb.git'   
 }
         stage("Maven Build"){
             steps{
-                sh "mvn clean sonar:sonar package"
-                sh "mv target/*.war target/myweb.war"
+                sh " clean sonar:sonar package"
+                sh " target/*.war target/myweb.war"
             }
         }
         stage("deploy-dev"){
