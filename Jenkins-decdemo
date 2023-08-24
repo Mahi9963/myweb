@@ -1,17 +1,30 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage("GIT checkout"){
-            steps{
-                git credentialsId: 'javahome', url: 'https://github.com/srinivas1987devops/myweb.git'
-                
+    stages {
+        stage("GIT checkout") {
+            steps {
+                git credentialsId: 'javahome', url: 'https://github.com/Mahi9963/myweb.git'
             }
         }
-        stage("Maven Build"){
-            steps{
+        
+        stage("Maven Build") {
+            steps {
                 sh "mvn clean package"
                 sh "mv target/*.war target/myweb.war"
             }
-         }
+        }
+        
+        stage("Deploy-Dev") {
+            steps {
+                // Define source and destination paths
+                def sourceWar = "/var/lib/jenkins/workspace/project1/target/myweb.war"
+                def tomcatWebappsDir = "/home/ec2-user/apache-tomcat-9.0.79/webapps"
+
+                // Copy the WAR file to Tomcat webapps directory
+                sh "cp ${sourceWar} ${tomcatWebappsDir}"
+
+                echo "WAR file deployed to Tomcat!"
+            }
+        }
     }
 }
